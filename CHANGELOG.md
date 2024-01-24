@@ -9,6 +9,7 @@ MVP version
 
 ### Added
 
+- Add laravel sail
 - Service for connection with OpenAi Completion tool using Curl.
 - Service for preparing and handling prompts for estimations generation.
 - Simple authentication based on laravel breeze.

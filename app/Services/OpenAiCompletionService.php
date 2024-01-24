@@ -38,7 +38,7 @@ class OpenAiCompletionService
         // Set the headers for the request
         $headers = array(
             'Content-Type: application/json',
-            'Authorization: Bearer ' . $_ENV["OPEN_API_KEY"],
+            'Authorization: Bearer ' . $_ENV["OPENAI_API_KEY"],
         );
         curl_setopt($this->curlHandle, CURLOPT_HTTPHEADER, $headers);
 

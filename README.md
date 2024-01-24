@@ -8,3 +8,8 @@ The premise of the application is as follows:
 
 
 Currently, this is the MVP version of the project.
+
+---
+Important: 
+- You need to set up your OpenAI api key in .env file.
+- Run a queue in artisan
