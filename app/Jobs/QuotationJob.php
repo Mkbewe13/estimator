@@ -23,8 +23,7 @@ class QuotationJob implements ShouldQueue
      */
     public function __construct(int $quotationDataId)
     {
-        $this->quotationDataId =$quotationDataId;
-
+        $this->quotationDataId = $quotationDataId;
     }
 
     /**

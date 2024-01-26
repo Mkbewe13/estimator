@@ -6,13 +6,20 @@ use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Exception;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
 class QuotationResultExport implements FromArray, WithColumnFormatting, WithColumnWidths, WithStyles
 {
-    public array $quotationResult;
-    public int $dataRowsCount;
+    private array $quotationResult;
+    private int $dataRowsCount;
+
+    private const COLUMNS = [
+        'Description',
+        'Min',
+        'Max'
+    ];
 
     public function __construct(array $quotationResult)
     {
@@ -22,29 +29,24 @@ class QuotationResultExport implements FromArray, WithColumnFormatting, WithColu
 
     public function array(): array
     {
-        $preparedArray = [];
-        $columns =  [
-            'Description',
-            'Min',
-            'Max'
-        ];
+        $resultArray = [];
 
-        $preparedArray[] = $columns;
+        $resultArray[] = self::COLUMNS;
         $columnsIterator = 1;
         foreach ($this->quotationResult as $result){
-            $preparedArray[] = [$result['description'],$result['min'],$result['max']];
+            $resultArray[] = [$result['description'],$result['min'],$result['max']];
             $columnsIterator++;
         }
 
-        $preparedArray[]= [' '];
+        $resultArray[]= [' '];
         $columnsIterator++;
-        $preparedArray[] = ['Min', '=SUM(B2:B' . $this->dataRowsCount + 1 .')'];
+        $resultArray[] = ['Min', '=SUM(B2:B' . $this->dataRowsCount + 1 .')'];
         $columnsIterator++;
-        $preparedArray[] = ['Max', '=SUM(C2:C' . $this->dataRowsCount + 1 .')'];
+        $resultArray[] = ['Max', '=SUM(C2:C' . $this->dataRowsCount + 1 .')'];
         $columnsIterator++;
-        $preparedArray[] = ['Avg', '=AVERAGE(B' . $columnsIterator -1 . ':B' . $columnsIterator . ')'];
+        $resultArray[] = ['Avg', '=AVERAGE(B' . $columnsIterator -1 . ':B' . $columnsIterator . ')'];
 
-        return $preparedArray;
+        return $resultArray;
     }
 
     public function columnFormats(): array
@@ -65,6 +67,9 @@ class QuotationResultExport implements FromArray, WithColumnFormatting, WithColu
         ];
     }
 
+    /**
+     * @throws Exception
+     */
     public function styles(Worksheet $sheet)
     {
         $styleArrayColumn = [

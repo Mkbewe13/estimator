@@ -11,6 +11,14 @@ class QuotationData extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'id',
+       'name',
+       'description',
+       'userflow',
+       'requirements'
+    ];
+
     public function frontQuotationResult()
     {
         $result = DB::table('quotation_results')

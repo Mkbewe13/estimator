@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\QuotationStatus;
 use App\Models\QuotationData;
 use App\Models\QuotationResult;
 use Exception;
@@ -257,7 +258,7 @@ class QuotationService
     }
 
     private function markQuotationDataAsDone(){
-        $this->quotationData->status = 'done';
+        $this->quotationData->status = QuotationStatus::DONE;
         $this->quotationData->save();
     }
 

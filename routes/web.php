@@ -21,29 +21,29 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+//User
 Route::get('/', [\App\Http\Controllers\QuotationDataController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('index');
 
+//QuotationData
 Route::post('/estimations', [\App\Http\Controllers\QuotationDataController::class,'store'])
     ->middleware(['auth', 'verified'])->name('estimations.store');
-
 Route::get('/estimations', [\App\Http\Controllers\QuotationDataController::class,'form'])
     ->middleware(['auth', 'verified'])->name('estimations.form');;
-
 Route::get('/show/{id}', [\App\Http\Controllers\QuotationDataController::class,'show'])
     ->middleware(['auth', 'verified'])->name('estimations.show');;
-
 Route::get('/edit/{id}', [\App\Http\Controllers\QuotationDataController::class,'edit'])
     ->middleware(['auth', 'verified'])->name('estimations.edit');
-
 Route::put('/estimations', [\App\Http\Controllers\QuotationDataController::class,'update'])
     ->middleware(['auth', 'verified'])->name('estimations.update');
+Route::post('/estimations/send', [\App\Http\Controllers\QuotationDataController::class, 'dispatch'])
+    ->middleware(['auth', 'verified'])->name('estimations.dispatch');
 
-Route::post('/estimations/send', [\App\Http\Controllers\QuotationDataController::class,'send'])
-    ->middleware(['auth', 'verified'])->name('estimations.send');
-
+//Files
 Route::post('/xls', [\App\Http\Controllers\XlsController::class,'download'])
     ->middleware(['auth', 'verified'])->name('xlsx.download');
+Route::post('/docx', [\App\Http\Controllers\DocxController::class,'download'])
+    ->middleware(['auth', 'verified'])->name('docx.download');
 
 require __DIR__.'/auth.php';

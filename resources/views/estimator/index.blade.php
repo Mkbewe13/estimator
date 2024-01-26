@@ -2,7 +2,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            @if($quotations == null)
+            @if($quotations->isEmpty())
 
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
@@ -34,11 +34,11 @@
 
                         <div style="display: flex">
                                 <b style="margin-top: 5px;margin-right: 10px;" >Status: </b>
-                            @if($quotation->status == 'new')
+                            @if($quotation->status == \App\Enums\QuotationStatus::NEW)
                                 <p style="margin-top: 5px;margin-right: 80px;text-align: center;color: darkblue">New</p>
-                            @elseif($quotation->status == 'in_progress')
+                            @elseif($quotation->status == \App\Enums\QuotationStatus::IN_PROGRESS)
                                 <p style="margin-top: 5px;margin-right: 80px;text-align: center;color: darkorange">Processing...</p>
-                            @else
+                            @elseif($quotation->status == \App\Enums\QuotationStatus::DONE)
                                 <p style="margin-top: 5px;margin-right: 80px;text-align: center;color: darkgreen">Ready to download</p>
                             @endif
 
