@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\QuotationStatus;
 use App\Models\QuotationData;
 use App\Models\QuotationResult;
 use Exception;
@@ -157,29 +158,28 @@ class QuotationService
     {
         try {
             $processedResponse = $this->processResponse($response);
-
-            $quotationResult = new QuotationResult();
-            $quotationResult->result = json_encode($processedResponse);
-            $quotationResult->project_side = 'backend';
-            $quotationResult->quotation_data_id = $this->quotationData->id;
-            $quotationResult->save();
-
-            $this->markQuotationDataAsDone();
-            Log::info('Backend quotation processed successfully for Q_Data ID:' . $this->quotationData->id);
         }catch (Exception $e){
             switch ($e->getCode()){
                 case 1:
-                    Log::info('Backend Error ID:' . $e->getCode());
+                    Log::info('Backend Error ID:' . $e->getMessage());
                     break;
                 case 2:
-                    Log::info('Backend Error ID:' . $e->getCode());
+                    Log::info('Backend Error ID:' . $e->getMessage());
                     break;
                 case 3:
-                    Log::info('Backend Error ID:' . $e->getCode());
+                    Log::info('Backend Error ID:' . $e->getMessage());
                     break;
             }
         }
+        $quotationResult = new QuotationResult();
+        $quotationResult->result = json_encode($processedResponse);
+        $quotationResult->project_side = 'backend';
+        $quotationResult->quotation_data_id = $this->quotationData->id;
+        $quotationResult->save();
 
+        $this->markQuotationDataAsDone();
+
+        Log::info('Backend quotation processed successfully for Q_Data ID:' . $this->quotationData->id);
     }
 
     private function processFrontendQuotation(bool|string $response)
@@ -257,7 +257,7 @@ class QuotationService
     }
 
     private function markQuotationDataAsDone(){
-        $this->quotationData->status = 'done';
+        $this->quotationData->status = QuotationStatus::DONE->value;
         $this->quotationData->save();
     }
 

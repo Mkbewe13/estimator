@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\QuotationStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +18,7 @@ return new class extends Migration
             $table->text('description');
             $table->text('userflow');
             $table->text('requirements');
-            $table->enum('status', ['new', 'in_progress', 'done'])->default('new');
+            $table->enum('status', [QuotationStatus::NEW->value, QuotationStatus::IN_PROGRESS->value, QuotationStatus::DONE])->default(QuotationStatus::NEW->value);
             $table->timestamps();
         });
     }
