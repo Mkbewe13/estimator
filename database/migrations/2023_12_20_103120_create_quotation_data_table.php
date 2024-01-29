@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('description');
             $table->text('userflow');
             $table->text('requirements');
-            $table->enum('status', [QuotationStatus::NEW, QuotationStatus::IN_PROGRESS, QuotationStatus::DONE])->default(QuotationStatus::NEW);
+            $table->enum('status', [QuotationStatus::NEW->value, QuotationStatus::IN_PROGRESS->value, QuotationStatus::DONE])->default(QuotationStatus::NEW->value);
             $table->timestamps();
         });
     }

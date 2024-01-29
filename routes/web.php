@@ -39,6 +39,8 @@ Route::put('/estimations', [\App\Http\Controllers\QuotationDataController::class
     ->middleware(['auth', 'verified'])->name('estimations.update');
 Route::post('/estimations/send', [\App\Http\Controllers\QuotationDataController::class, 'dispatch'])
     ->middleware(['auth', 'verified'])->name('estimations.dispatch');
+Route::get('/delete/{id}', [\App\Http\Controllers\QuotationDataController::class,'delete'])
+    ->middleware(['auth', 'verified'])->name('estimations.delete');
 
 //Files
 Route::post('/xls', [\App\Http\Controllers\XlsController::class,'download'])

@@ -82,6 +82,19 @@ class QuotationDataController extends Controller
         return view('estimator.show', ['quotation' => $quotationData]);
     }
 
+    public function delete($id): RedirectResponse
+    {
+        $quotationData = QuotationData::find($id);
+
+        if(!$quotationData){
+            throw new Exception('Estimate not found by ID');
+        }
+
+        $quotationData->delete();
+
+        return redirect()->route('index');
+    }
+
     /**
      * Displays form for editing QuotationData object.
      *
@@ -147,7 +160,7 @@ class QuotationDataController extends Controller
             throw new Exception('Estimate not found by ID');
         }
 
-        $quotationData->status = QuotationStatus::IN_PROGRESS;
+        $quotationData->status = QuotationStatus::IN_PROGRESS->value;
         $quotationData->save();
 
         QuotationJob::dispatch($quotationData->id);

@@ -34,11 +34,11 @@
 
                         <div style="display: flex">
                                 <b style="margin-top: 5px;margin-right: 10px;" >Status: </b>
-                            @if($quotation->status == \App\Enums\QuotationStatus::NEW)
+                            @if($quotation->status == \App\Enums\QuotationStatus::NEW->value)
                                 <p style="margin-top: 5px;margin-right: 80px;text-align: center;color: darkblue">New</p>
-                            @elseif($quotation->status == \App\Enums\QuotationStatus::IN_PROGRESS)
+                            @elseif($quotation->status == \App\Enums\QuotationStatus::IN_PROGRESS->value)
                                 <p style="margin-top: 5px;margin-right: 80px;text-align: center;color: darkorange">Processing...</p>
-                            @elseif($quotation->status == \App\Enums\QuotationStatus::DONE)
+                            @elseif($quotation->status == \App\Enums\QuotationStatus::DONE->value)
                                 <p style="margin-top: 5px;margin-right: 80px;text-align: center;color: darkgreen">Ready to download</p>
                             @endif
 

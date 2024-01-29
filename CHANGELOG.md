@@ -4,12 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-## [0.1.1] - 2024-01-26
+## [0.1.1] - 2024-01-29
 ### Added
 - Hide edit button in Show QuotationData view if status is not "new"
 - A description of the application download (content of the application prompt) has been added in the docx file, for the person who will correct the estimates.
 - Self backend code review with code improvement
 - New Enums directory with QuotationStatus enum class.
+- Add deleting QuotationData
+- Log error info instead of code
 
 ## [0.1.0] - 2024-01-24
 MVP version
