@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.list-item-button{
+    color: white;
+    background-color: royalblue;
+    @media not screen and (min-device-width: 320px) and (max-device-width: 480px) {
+        margin-right: 40px;
+    }
+
+}
+
+.list-item-status{
+    margin-top: 5px;
+    @media not screen and (min-device-width: 320px) and (max-device-width: 480px) {
+        margin-right: 70px;
+    }
+}
+
+.list-item-status-new{
+    color: black;
+}
+.list-item-status-in-progress{
+color: darkorange;
+}
+.list-item-status-done{
+color: seagreen;
+}

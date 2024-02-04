@@ -3,7 +3,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             @if($quotations->isEmpty())
-
+{{--                @TODO dodać component pusta lista--}}
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
 
@@ -17,41 +17,8 @@
                 </div>
 
             @else
-
-
-
             @foreach($quotations as $quotation )
-
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-
-
-                <div class="p-6 text-gray-900">
-
-
-                    <div style="display: flex; justify-content: space-between">
-
-                    <a href="{{route('estimations.show',['id' => $quotation->id])}}">{{ $quotation->name}}</a>
-
-                        <div style="display: flex">
-                                <b style="margin-top: 5px;margin-right: 10px;" >Status: </b>
-                            @if($quotation->status == \App\Enums\QuotationStatus::NEW->value)
-                                <p style="margin-top: 5px;margin-right: 80px;text-align: center;color: darkblue">New</p>
-                            @elseif($quotation->status == \App\Enums\QuotationStatus::IN_PROGRESS->value)
-                                <p style="margin-top: 5px;margin-right: 80px;text-align: center;color: darkorange">Processing...</p>
-                            @elseif($quotation->status == \App\Enums\QuotationStatus::DONE->value)
-                                <p style="margin-top: 5px;margin-right: 80px;text-align: center;color: darkgreen">Ready to download</p>
-                            @endif
-
-
-                    <x-primary-button   type="button" style="margin-right: 40px;" onclick="window.location='{{ route('estimations.show',['id' => $quotation->id]) }}'">Enter estimation</x-primary-button>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-                <br>
+                    <x-list-item :name="$quotation->name" :status="$quotation->status" :url="route('estimations.show',['id' => $quotation->id]) "/>
             @endforeach
             @endif
         </div>
