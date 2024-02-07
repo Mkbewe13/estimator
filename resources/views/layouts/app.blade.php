@@ -25,7 +25,6 @@
 <body class="font-sans antialiased">
 <div class="min-h-screen bg-gray-100">
     @include('layouts.nav')
-
     <!-- Page Heading -->
     @if (isset($header))
         <header class="bg-white shadow">
@@ -36,9 +35,11 @@
     @endif
 
     <!-- Page Content -->
-    <main>
+    <main class="mt-4 mb-4">
         {{ $slot }}
     </main>
 </div>
+@include('layouts/footer')
+@stack('scripts')
 </body>
 </html>

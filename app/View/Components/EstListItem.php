@@ -8,7 +8,7 @@ use Illuminate\View\Component;
 use Illuminate\View\View;
 use function Symfony\Component\String\b;
 
-class ListItem extends Component
+class EstListItem extends Component
 {
 
     public function __construct(
@@ -40,6 +40,6 @@ class ListItem extends Component
                 $this->status='Wrong status';
 
         }
-        return view('components.list-item');
+        return view('components.est-list-item');
     }
 }

@@ -27,3 +27,14 @@ color: darkorange;
 .list-item-status-done{
 color: seagreen;
 }
+
+
+.create-form-button{
+    color: white;
+    background-color: royalblue;
+    width: 20%;
+}
+
+.form-row-info-active{
+    color: royalblue;
+}

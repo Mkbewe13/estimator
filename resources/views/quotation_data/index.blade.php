@@ -10,7 +10,7 @@
                     <div class="p-6 text-gray-900">
                         <div style="display: flex; justify-content: space-between">
                             <p>There are no estimations, go ahead and create one :)</p>
-                            <x-primary-button style="display: flex"  type="button" style="margin-right: 40px;" onclick="window.location='{{ route('estimations.store') }}'">Create estimation</x-primary-button>
+                            <x-primary-button style="display: flex"  type="button" style="margin-right: 40px;" onclick="window.location='{{ route('quotation_data.store') }}'">Create estimation</x-primary-button>
                         </div>
                     </div>
 
@@ -18,7 +18,7 @@
 
             @else
             @foreach($quotations as $quotation )
-                    <x-list-item :name="$quotation->name" :status="$quotation->status" :url="route('estimations.show',['id' => $quotation->id]) "/>
+                    <x-est-list-item :name="$quotation->name" :status="$quotation->status" :url="route('quotation_data.show',['id' => $quotation->id]) "/>
             @endforeach
             @endif
         </div>

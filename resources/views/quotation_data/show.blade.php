@@ -12,9 +12,9 @@
                     <p>Name: </p>
                     <b>{{$quotation->name}}</b>
                     @if($quotation->status == \App\Enums\QuotationStatus::NEW->value)
-                    <x-primary-button style="display: flex"  type="button" onclick="window.location='{{ route('estimations.edit',['id' => $quotation->id]) }}'">Edit</x-primary-button>
+                    <x-primary-button style="display: flex"  type="button" onclick="window.location='{{ route('quotation_data.edit',['id' => $quotation->id]) }}'">Edit</x-primary-button>
                     @endif
-                    <x-primary-button style="display: flex;color: darkred"  type="button" onclick="window.location='{{ route('estimations.delete',['id' => $quotation->id]) }}'">Delete</x-primary-button>
+                    <x-primary-button style="display: flex;color: darkred"  type="button" onclick="window.location='{{ route('quotation_data.delete',['id' => $quotation->id]) }}'">Delete</x-primary-button>
                 </div>
             </div>
 
@@ -56,7 +56,7 @@
 
                     </div>
                 @else
-                    <form method="POST" action="{{ route('estimations.dispatch') }}">
+                    <form method="POST" action="{{ route('quotation_data.dispatch') }}">
                         @csrf
                         <input type="hidden" name="id" value={{$quotation->id}}>
                         <div style="text-align: center">

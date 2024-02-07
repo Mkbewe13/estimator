@@ -24,7 +24,8 @@ class QuotationDataController extends Controller
      */
     public function form(): View
     {
-        return view('estimator.store');
+        return view('quotation_data.create');
+        return view('quotation_data.store');
     }
 
 
@@ -46,7 +47,7 @@ class QuotationDataController extends Controller
 
         QuotationData::create($validated);
 
-        return redirect(route('index'));
+        return redirect()->route('quotation_data.index');
     }
 
 
@@ -59,7 +60,7 @@ class QuotationDataController extends Controller
     {
         $quotations = QuotationData::paginate('10');
 
-        return view('estimator.index', [
+        return view('quotation_data.index', [
             'quotations' => $quotations
         ]);
     }
@@ -79,7 +80,7 @@ class QuotationDataController extends Controller
             throw new Exception('Estimate not found by ID');
         }
 
-        return view('estimator.show', ['quotation' => $quotationData]);
+        return view('quotation_data.show', ['quotation' => $quotationData]);
     }
 
     public function delete($id): RedirectResponse
@@ -92,7 +93,7 @@ class QuotationDataController extends Controller
 
         $quotationData->delete();
 
-        return redirect()->route('index');
+        return redirect()->route('quotation_data.index');
     }
 
     /**
@@ -109,7 +110,7 @@ class QuotationDataController extends Controller
         if(!$quotationData){
             throw new Exception('Estimate not found by ID');
         }
-        return view('estimator.edit', ['quotation' => $quotationData]);
+        return view('quotation_data.edit', ['quotation' => $quotationData]);
     }
 
 
@@ -137,7 +138,7 @@ class QuotationDataController extends Controller
         }
 
         $quotationData->update($validated);
-        return view('estimator.show', ['quotation' => $quotationData]);
+        return view('quotation_data.show', ['quotation' => $quotationData]);
     }
 
     /**
@@ -165,7 +166,7 @@ class QuotationDataController extends Controller
 
         QuotationJob::dispatch($quotationData->id);
 
-        return view('estimator.show', ['quotation' => $quotationData]);
+        return view('quotation_data.show', ['quotation' => $quotationData]);
     }
 
 
