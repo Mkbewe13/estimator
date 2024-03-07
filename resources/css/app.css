@@ -18,8 +18,17 @@
     }
 }
 
-.list-item-status-new{
+.list-item-status-preparing{
     color: black;
+}
+.list-item-status-waiting{
+    color: coral;
+}
+.list-item-status-rejected{
+    color: indianred;
+}
+.list-item-status-accepted{
+    color: darkblue;
 }
 .list-item-status-in-progress{
 color: darkorange;
@@ -28,6 +37,17 @@ color: darkorange;
 color: seagreen;
 }
 
+.form-row-list-info-rejected{
+    color: red;
+}
+
+.form-row-label-rejected{
+    color: red;
+}
+
+.form-row-textarea-rejected{
+    background: red;
+}
 
 .create-form-button{
     color: white;

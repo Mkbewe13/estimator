@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\QuotationStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,9 +17,17 @@ class QuotationData extends Model
     protected $fillable = [
         'id',
        'name',
-       'description',
-       'userflow',
-       'requirements'
+       'objectives',
+       'features',
+       'roles',
+        'integrations',
+        'db',
+        'design',
+        'deploy',
+        'scalability',
+        'maintenance',
+        'tech',
+        'status'
     ];
 
     public function frontQuotationResult()
@@ -38,4 +47,20 @@ class QuotationData extends Model
             ->first();
         return $result;
     }
+
+    public function getProjectData(){
+        return [
+            'Project Goals and Objectives' => $this->objectives,
+            'Feature List' => $this->features,
+            'User Roles and Permissions' => $this->roles,
+            'Integration Points' => $this->integrations,
+            'Data Management' => $this->db,
+            'UI/UX Design Requirements' => $this->design,
+            'Deployment Environment' => $this->deploy,
+            'Scalability and Performance Requirements' => $this->scalability,
+            'Maintenance and Update Plans' => $this->maintenance,
+            'Tools and Technologies Preferences' => $this->tech,
+        ];
+    }
+
 }

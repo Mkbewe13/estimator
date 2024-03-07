@@ -12,10 +12,13 @@ class EstListItem extends Component
 {
 
     public function __construct(
+        public int $id,
         public string $name,
         public string $status,
-        public string $url,
-        public string $displayCssClass ='list-item-status-in-progress')
+        public ?string $url,
+        public string $displayCssClass ='list-item-status-in-progress',
+        public string $displayStatus = '')
+
     {}
 
     /**
@@ -25,16 +28,32 @@ class EstListItem extends Component
     {
         switch ($this->status){
             case QuotationStatus::DONE->value:
-                $this->status='Ready to download';
+                $this->displayStatus='Ready to download';
                 $this->displayCssClass = 'list-item-status-done';
                 break;
-            case QuotationStatus::IN_PROGRESS->value:
-                $this->status='In progress...';
+            case QuotationStatus::ESTIMATION_IN_PROGRESS->value:
+                $this->displayStatus='Estimation in progress...';
                 $this->displayCssClass = 'list-item-status-in-progress';
                 break;
-            case QuotationStatus::NEW->value:
-                $this->status='New';
-                $this->displayCssClass = 'list-item-status-new';
+            case QuotationStatus::WAITING_FOR_ACCEPT->value:
+                $this->displayStatus='Waiting for data verification';
+                $this->displayCssClass = 'list-item-status-waiting';
+                break;
+            case QuotationStatus::ACCEPTATION_IN_PROGRESS->value:
+                $this->displayStatus='Verification in progress...';
+                $this->displayCssClass = 'list-item-status-in-progress';
+                break;
+            case QuotationStatus::REJECTED->value:
+                $this->displayStatus='Rejected';
+                $this->displayCssClass = 'list-item-status-rejected';
+                break;
+            case QuotationStatus::ACCEPTED->value:
+                $this->displayStatus='Data accepted';
+                $this->displayCssClass = 'list-item-status-accepted';
+                break;
+            case QuotationStatus::PREPARING->value:
+                $this->displayStatus='Preparing data';
+                $this->displayCssClass = 'list-item-status-preparing';
                 break;
             default:
                 $this->status='Wrong status';

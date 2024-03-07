@@ -21,6 +21,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::group(['middleware' => 'prevent-back-button'],function(){
+    Route::get('/estimations/{step}', 'HomeController@index');
+});
+
 //User
 Route::get('/', [\App\Http\Controllers\QuotationDataController::class, 'index'])
     ->middleware(['auth', 'verified'])
@@ -29,17 +33,21 @@ Route::get('/', [\App\Http\Controllers\QuotationDataController::class, 'index'])
 //QuotationData
 Route::post('/estimations', [\App\Http\Controllers\QuotationDataController::class,'store'])
     ->middleware(['auth', 'verified'])->name('quotation_data.store');
-Route::get('/estimations', [\App\Http\Controllers\QuotationDataController::class,'form'])
+Route::get('/estimations/{step}', [\App\Http\Controllers\QuotationDataController::class,'form'])
     ->middleware(['auth', 'verified'])->name('quotation_data.form');;
+Route::post('/estimations/edit', [\App\Http\Controllers\QuotationDataController::class,'edit'])
+    ->middleware(['auth', 'verified'])->name('quotation_data.edit');
+Route::post('/estimations/verify', [\App\Http\Controllers\QuotationDataController::class,'verify'])
+    ->middleware(['auth', 'verified'])->name('quotation_data.verify');
 Route::get('/show/{id}', [\App\Http\Controllers\QuotationDataController::class,'show'])
     ->middleware(['auth', 'verified'])->name('quotation_data.show');;
-Route::get('/edit/{id}', [\App\Http\Controllers\QuotationDataController::class,'edit'])
-    ->middleware(['auth', 'verified'])->name('quotation_data.edit');
+//Route::get('/edit/{id}', [\App\Http\Controllers\QuotationDataController::class,'edit'])
+//    ->middleware(['auth', 'verified'])->name('quotation_data.edit');
 Route::put('/estimations', [\App\Http\Controllers\QuotationDataController::class,'update'])
     ->middleware(['auth', 'verified'])->name('quotation_data.update');
 Route::post('/estimations/send', [\App\Http\Controllers\QuotationDataController::class, 'dispatch'])
     ->middleware(['auth', 'verified'])->name('quotation_data.dispatch');
-Route::get('/delete/{id}', [\App\Http\Controllers\QuotationDataController::class,'delete'])
+Route::post('/delete/', [\App\Http\Controllers\QuotationDataController::class,'delete'])
     ->middleware(['auth', 'verified'])->name('quotation_data.delete');
 
 //Files

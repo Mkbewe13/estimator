@@ -12,8 +12,10 @@
                 <a class="nav-link" href="{{ route('quotation_data.index') }}">Projects Estimations</a>
             </li>
             <li class="nav-item ml-md-3 {{ Request::is('estimations*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('quotation_data.form') }}">Create Estimation</a>
+                <a class="nav-link" href="{{ route('quotation_data.form',1) }}">Create Estimation</a>
             </li>
         </ul>
     </div>
+   STEP: {{session('step') ?? 'none'}}
+    | QID: {{session('qid') ?? 'none'}}
 </nav>

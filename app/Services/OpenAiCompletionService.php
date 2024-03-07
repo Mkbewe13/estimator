@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use CurlHandle;
+use Illuminate\Support\Facades\Log;
 
 class OpenAiCompletionService
 {
@@ -63,10 +64,11 @@ class OpenAiCompletionService
         $requestData = json_encode([
             "messages" => $this->messages, "model" => $this->model]);
         $response = $this->postRequest(self::OPENAI_API_URL, $requestData);
-
+        Log::info(json_encode($response));
         $response = isset(json_decode($response)->choices[0]->message->content) ? json_decode($response)->choices[0]->message->content : false;
 
         if(!$response){
+            Log::info('test ret false0');
             return false;
         }
 
