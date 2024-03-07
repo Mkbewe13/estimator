@@ -29,6 +29,8 @@ enum QuotationStatus: string
                 return "Your estimation is in progress.";
             case QuotationStatus::DONE->value:
                 return "Your estimation is ready!";
+            default:
+                return "Wrong status check ENUM";
         }
     }
 

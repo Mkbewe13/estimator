@@ -11,7 +11,7 @@
 
                     <p>Name: </p>
                     <b>{{$quotation->name}}</b>
-                    @if($quotation->status == \App\Enums\QuotationStatus::NEW->value)
+                    @if($quotation->status == \App\Enums\QuotationStatus::PREPARING->value)
                         <x-primary-button style="display: flex" type="button"
                                           onclick="window.location='{{ route('quotation_data.edit',['id' => $quotation->id]) }}'">
                             Edit
