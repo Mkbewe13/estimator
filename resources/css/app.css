@@ -58,3 +58,17 @@ color: seagreen;
 .form-row-info-active{
     color: royalblue;
 }
+.link-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.link-list li {
+    margin: 10px;
+}
+
+.custom-badge:hover {
+    background-color: red;
+    cursor: pointer;
+}

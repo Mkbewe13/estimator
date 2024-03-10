@@ -45,7 +45,7 @@
                     <button disabled class="btn btn-primary list-item-button">Estimating...</button>
                     @break
                 @default
-                    <a class="btn  btn-primary list-item-button" href="{{$url}}">Show</a>
+                    <a class="btn  btn-primary list-item-button" href="{{route('quotation_data.show',$id)}}">Show</a>
                     @break
             @endswitch
 

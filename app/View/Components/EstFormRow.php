@@ -38,7 +38,7 @@ class EstFormRow extends Component
             $quotationData = QuotationData::find($this->quotationDataId);
             $this->value = $quotationData->{$this->name} ?? '';
 
-            if($quotationData->status != QuotationStatus::PREPARING->value && $this->ordinalNumber != 0){
+            if($quotationData->status != QuotationStatus::PREPARING->value && $quotationData->status != QuotationStatus::WAITING_FOR_ACCEPT->value && $this->ordinalNumber != 0){
                 $verificationResult =  VerificationResult::where('quotation_data_id', $this->quotationDataId)->first();
                 $verificationResultDetails = $verificationResult->getVerificationDetailsArray();
                 $this->isVerified = $verificationResultDetails[$this->ordinalNumber]['result'];

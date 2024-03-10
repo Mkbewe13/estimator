@@ -26,39 +26,8 @@ class EstListItem extends Component
      */
     public function render(): View
     {
-        switch ($this->status){
-            case QuotationStatus::DONE->value:
-                $this->displayStatus='Ready to download';
-                $this->displayCssClass = 'list-item-status-done';
-                break;
-            case QuotationStatus::ESTIMATION_IN_PROGRESS->value:
-                $this->displayStatus='Estimation in progress...';
-                $this->displayCssClass = 'list-item-status-in-progress';
-                break;
-            case QuotationStatus::WAITING_FOR_ACCEPT->value:
-                $this->displayStatus='Waiting for data verification';
-                $this->displayCssClass = 'list-item-status-waiting';
-                break;
-            case QuotationStatus::ACCEPTATION_IN_PROGRESS->value:
-                $this->displayStatus='Verification in progress...';
-                $this->displayCssClass = 'list-item-status-in-progress';
-                break;
-            case QuotationStatus::REJECTED->value:
-                $this->displayStatus='Rejected';
-                $this->displayCssClass = 'list-item-status-rejected';
-                break;
-            case QuotationStatus::ACCEPTED->value:
-                $this->displayStatus='Data accepted';
-                $this->displayCssClass = 'list-item-status-accepted';
-                break;
-            case QuotationStatus::PREPARING->value:
-                $this->displayStatus='Preparing data';
-                $this->displayCssClass = 'list-item-status-preparing';
-                break;
-            default:
-                $this->status='Wrong status';
-
-        }
+        $this->displayStatus = QuotationStatus::getStatusNicename($this->status);
+        $this->displayCssClass = QuotationStatus::getStatusColorClass($this->status);
         return view('components.est-list-item');
     }
 }

@@ -150,13 +150,13 @@ class QuotationDataController extends Controller
      */
     public function show($id): \Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|Factory|Application
     {
-        $quotationData = QuotationData::find($id);
-
-        if(!$quotationData){
-            throw new Exception('Estimate not found by ID');
+        $quotationData = QuotationData::findOrFail($id);
+        // Ensure the status is one of the permitted ones
+        if (!in_array($quotationData->status, [QuotationStatus::ACCEPTED->value, QuotationStatus::ESTIMATION_IN_PROGRESS->value, QuotationStatus::DONE->value])) {
+            redirect()->route('quotation_data.index');
         }
 
-        return view('quotation_data.show', ['quotation' => $quotationData]);
+        return view('quotation_data.show2', ['quotationData' => $quotationData]);
     }
 
     public function delete(Request $request): RedirectResponse
@@ -273,16 +273,7 @@ class QuotationDataController extends Controller
     }
 
     private function handleFormRedirection(int $step,?int $quotationDataId): RedirectResponse
-    {       //@todo
-        //obsługa edycji po rejectcie
-        //testy weryfikacji => widok podglądu => logika uruchamiania estymacji => estymowanie
-        //logika uruchamiania estymacji - jakaś forma wybierania szczegółow estymacji jnior/mid/senior czy bufor na spotkania czy testy jednostkowe
-        //
-
-
-        // - nawigacja w formie na liscie pytan
-        //oznaczanie jako niepotrzebnych w formularzu? żeby user wiedział że może zostawić puste.
-
+    {
         $nextStep = $step + 1;
         switch ($step) {
             case 3:

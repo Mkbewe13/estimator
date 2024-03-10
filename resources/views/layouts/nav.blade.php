@@ -16,6 +16,4 @@
             </li>
         </ul>
     </div>
-   STEP: {{session('step') ?? 'none'}}
-    | QID: {{session('qid') ?? 'none'}}
 </nav>
